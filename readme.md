@@ -6,7 +6,7 @@ At home, I typically use:
  * wrote in es6 with babel.
  * a lot of react
 
-At work, I typicall use:
+At work, I typically use:
  * a whole lot of bootstrap, and less
  * express on the server
  * coffeescript/cjsx
