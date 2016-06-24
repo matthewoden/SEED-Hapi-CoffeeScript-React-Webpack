@@ -1,7 +1,16 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
-Routes = require './routes'
 { Router, browserHistory } = require 'react-router'
+{ Provider } = require 'react-redux'
+
+store = require './store'
+Routes = require './routes'
+
 target = document.getElementById('app')
 
-ReactDOM.render(<Router history={browserHistory} routes = { Routes }/>, target)
+component =
+  <Provider store = store>
+    <Router history={browserHistory} routes = { Routes }/>
+  </Provider>
+
+ReactDOM.render(component, target)

@@ -2,7 +2,7 @@ path = require 'path'
 exports.register = (plugin, options, next) =>
   plugin.route({
       method: 'GET',
-      path: '/public/{param*}',
+      path: '/app/{param*}',
       handler: {
           directory: {
               path: 'public',
@@ -15,7 +15,7 @@ exports.register = (plugin, options, next) =>
     method: 'GET'
     path: '/{page*}'
     handler: (request, reply) =>
-      reply.file('./public/view/index.html')
+      reply.file('./index.html')
   })
 
   next();

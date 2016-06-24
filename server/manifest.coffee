@@ -26,10 +26,49 @@ Manifest =
         plugin:
           register: 'inert'
       },
-
+      {
+        plugin:
+          register: 'good'
+          options:
+            reporters:
+              console: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{ log: '*', response: '*' }]
+              },
+              {
+                module: 'good-console'
+              },
+                'stdout'
+              ],
+              file: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{ ops: '*' }]
+              }, {
+                module: 'good-squeeze',
+                name: 'SafeJson'
+              }],
+              http: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{ error: '*' }]
+              }]
+      },
+      {
+        plugin:
+          register: './plugins/fakedata'
+      }
       {
        plugin:
-        { register: './static' }
+        register: './static'
+      }
+      {
+        plugin:
+          register: './api/feed'
+        options:
+          routes:
+            prefix: '/api/feed'
       }
     ]
 if process.env.NODE_ENV != 'production'
@@ -38,7 +77,7 @@ if process.env.NODE_ENV != 'production'
       register: 'hapi-webpack-dev-plugin',
       options:
         compiler: require('webpack')(require '../webpack.config.js')
-        quiet: true
+        quiet: false
         devIndex: 'public/view/index.html'
   })
 

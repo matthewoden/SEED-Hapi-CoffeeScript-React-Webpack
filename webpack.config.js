@@ -1,7 +1,6 @@
 var path              = require( 'path' );
 var webpack           = require( 'webpack' );
 var merge             = require( 'webpack-merge' );
-var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 var autoprefixer      = require( 'autoprefixer' );
 var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 
@@ -18,9 +17,9 @@ var commonConfig = {
     extensions:         ['', '.js', '.cjsx', '.coffee']
   },
   output: {
-    path: path.resolve( __dirname, 'public/' ),
-    publicPath: 'public',
-    filename: 'bundle.js',
+    path: path.resolve( __dirname, 'app/' ),
+    publicPath: 'app',
+    filename: 'app.js',
   },
   module: {
     loaders: [
@@ -32,23 +31,17 @@ var commonConfig = {
         test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract(['css', 'sass'])
       },
+      { test: /\.json?$/, loader: 'json' },
       { test: /\.cjsx?$/, loaders: ['coffee','cjsx'] },
       { test: /\.coffee$/, loader: 'coffee' }
     ]
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'view.html',
-      inject:   'body',
-      filename: 'view/index.html'
-    }),
     new ExtractTextPlugin( 'app.css' ),
-
   ],
 
   postcss: [ autoprefixer( { browsers: ['last 2 versions'] } ) ],
-
 }
 
 // additional webpack settings for local env (when invoked by 'npm start')

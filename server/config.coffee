@@ -18,7 +18,7 @@ Config = {
     baseUrl: {
         $filter: 'env',
         $meta: 'values should not end in "/"',
-        production: 'matthewoden.science/rebels',
+        production: 'url',
         $default: 'http://127.0.0.1:8000'
     },
 }
